@@ -2,7 +2,7 @@
 
 ## Usage
 ```
-python video_recording.py
+python webcam_video_recording.py
 ```
 
 - Press `r` to start recording.
