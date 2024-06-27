@@ -1,1 +1,1 @@
-# webcam_video_recording_with_opencv
+# Simple Video Recording App with Webcam and OpenCV
