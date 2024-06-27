@@ -29,7 +29,6 @@ print("Press ESC to exit")
 
 # Define the codec and create a VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('output.mp4', fourcc, fps, (width, height))
 
 recording = False
 
@@ -46,7 +45,7 @@ while True:
         key = cv2.waitKey(1) & 0xFF
 
         # Start recording if 'r' is pressed
-        if key == ord('r'):
+        if recording == False and key == ord('r'):
             recording = True
             now = datetime.now().strftime("%Y%m%d_%H%M%S")
             video_filepath = f'video_recordings/recording_{now}.mp4'
@@ -54,14 +53,14 @@ while True:
             print("Recording...")
             print("Press 'q' to stop recording")
         # Stop recording if 'q' is pressed
-        elif key == ord('q'):
+        elif recording == True and key == ord('q'):
+            out.release()
             recording = False
-            print("Stopped recording.")
-            print("Saved video as:", video_filepath)
+            print("Stopped recording. Saved video as:", video_filepath)
             print("Press 'r' to start recording")
             print("Press ESC to exit")
         # Exit program if ESC is pressed
-        elif key == 27:
+        elif recording == False and key == 27:
             break
     else:
         break
@@ -70,7 +69,6 @@ while True:
 
 # Release the webcam and close the output file
 cap.release()
-out.release()
 
 # Destroy all windows
 cv2.destroyAllWindows()
